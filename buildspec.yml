@@ -1,38 +1,6 @@
 version: 0.2
-
 phases:
-  install:
-    runtime-versions:
-      nodejs: 18
-    commands:
-      - echo Installing AWS SAM CLI...
-      - npm install -g aws-sam-cli
-     
-  pre_build:
-    commands:
-      - echo Installing function dependencies...
-      - |
-        for dir in lambda-functions/*; do
-          if [ -f "$dir/package.json" ]; then
-            echo "Installing in $dir"
-            (cd "$dir" && npm install)
-          fi
-        done
-
   build:
     commands:
-      - echo Building with SAM...
       - sam build
-
-  post_build:
-    commands:
-      - echo Deploying with SAM...
-      - sam deploy \
-          --template-file .aws-sam/build/template.yaml \
-          --stack-name my-lambda-stack \
-          --capabilities CAPABILITY_IAM \
-          --region us-east-1
-
-artifacts:
-  files:
-    - template.yaml
+      - sam deploy --no-confirm-changeset --no-fail-on-empty-changeset
