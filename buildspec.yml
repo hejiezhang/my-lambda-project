@@ -6,8 +6,7 @@ phases:
       nodejs: 18
     commands:
       - echo Installing AWS SAM CLI...
-      - npm install -g aws-sam-cli
-
+     
   pre_build:
     commands:
       - echo Installing function dependencies...
