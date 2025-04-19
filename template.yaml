@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Deploy multiple Lambda functions using AWS SAM
+
+Globals:
+  Function:
+    Runtime: nodejs18.x
+    Timeout: 10
+    MemorySize: 128
+
+Resources:
+  FunctionA:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: functionA
+      Handler: index.handler
+      CodeUri: lambda-functions/functionA/
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /functionA
+            Method: GET
+
+  FunctionB:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: functionB
+      Handler: index.handler
+      CodeUri: lambda-functions/functionB/
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /functionB
+            Method: GET
