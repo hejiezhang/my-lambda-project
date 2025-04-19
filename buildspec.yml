@@ -6,6 +6,7 @@ phases:
       nodejs: 18
     commands:
       - echo Installing AWS SAM CLI...
+      - npm install -g aws-sam-cli
 
   pre_build:
     commands:
@@ -26,11 +27,7 @@ phases:
   post_build:
     commands:
       - echo Deploying with SAM...
-      - sam deploy \
-          --template-file .aws-sam/build/template.yaml \
-          --stack-name my-lambda-stack \
-          --capabilities CAPABILITY_IAM \
-          --region us-east-1
+      - sam deploy --template-file .aws-sam/build/template.yaml --stack-name my-lambda-stack --capabilities CAPABILITY_IAM --region us-east-1
 
 artifacts:
   files:
