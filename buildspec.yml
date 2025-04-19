@@ -23,7 +23,7 @@ phases:
 
   build:
     commands:
-      - echo Building with SAM...
+      - echo Building with SAM....
       - sam build
 
   post_build:
